@@ -17,7 +17,7 @@
 								"id": "f7c1026a-8e81-4ce4-ac6f-bebe1fdf82d6",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.have.status(404);\r",
 									"});\r",
 									"\r",
 									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
