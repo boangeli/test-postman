@@ -1,0 +1,775 @@
+{
+	"info": {
+		"_postman_id": "42d8aed5-92d2-44cd-a2d1-eff3fc815421",
+		"name": "GestionAgendaV3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PAAS",
+			"item": [
+				{
+					"name": "AjouterRendezVous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f7c1026a-8e81-4ce4-ac6f-bebe1fdf82d6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"\r",
+									"var stripNS = require('xml2js').processors.stripPrefix;\r",
+									"var parseString = require('xml2js').parseString;\r",
+									"let jsResponse;\r",
+									"\r",
+									"parseString(responseBody, {\r",
+									"    tagNameProcessors: [stripNS]\r",
+									"}, function (err, result) {\r",
+									"    jsResponse = result\r",
+									"});\r",
+									"\r",
+									"expected = jsResponse['Envelope']['Body'][0]['ajouterRendezVousResponse'][0]['idEvenement'];\r",
+									"    pm.environment.set(\"idRendezVous\", expected);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "31e1a535-14ae-409d-af59-6639c9c6705f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "ajouterRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n\r\n<wsa:Action>ajouterRendezVous</wsa:Action></soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:ajouterRendezVousRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <!--<v3:idRessource>EXC1111@mvtdevdesjardins.com</v3:idRessource>-->\r\n         <v3:idRessource>SGestionAgendaMr@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2019-09-01T17:00:00.000-04:00</v3:dateDebut>\r\n            <v3:dateFin>2019-09-01T18:30:00.000-04:00</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <!--Optional:-->\r\n         <v3:sujetEvenement>Test GestionAgenda</v3:sujetEvenement>\r\n         <!--Optional:-->\r\n         <v3:descriptionEvenement>Description</v3:descriptionEvenement>\r\n         <v3:initiateurEvenement>Initiateur</v3:initiateurEvenement>\r\n         <!--Optional:-->\r\n         <v3:lieuEvenement>Lieu</v3:lieuEvenement>\r\n      </v3:ajouterRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{PAAS_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "ModifierRendezVous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"    var stripNS = require('xml2js').processors.stripPrefix;\r",
+									"var parseString = require('xml2js').parseString;\r",
+									"let jsResponse;\r",
+									"\r",
+									"parseString(responseBody, {\r",
+									"    tagNameProcessors: [stripNS]\r",
+									"}, function (err, result) {\r",
+									"    jsResponse = result\r",
+									"});\r",
+									"\r",
+									"errorMessage = jsResponse['Envelope']['Body'][0]['modifierRendezVousResponse'][0]['idEvenement']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "5be56b22-247a-4a3a-95fc-596f8bb21b4f"
+							}
+						}
+					],
+					"_postman_id": "a5475a5b-460c-4c43-88c8-eeb7d0c1ef96",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "modifierRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n   <wsa:Action>modifierRendezVous</wsa:Action></soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:modifierRendezVousRequest>\r\n         <!--Optional:-->\r\n         \r\n         <v3:idEvenement>{{idRendezVous}}</v3:idEvenement>\r\n         <v3:idRessource>Mathieu.gauthier.mgauthier.uni@mvtdevdesjardins.com,andrea.ocean.aocean.uni@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2018-09-01T19:00:00.000-04:00</v3:dateDebut>\r\n            <v3:dateFin>2018-09-01T19:30:00.000-04:00</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <!--Optional:-->\r\n         <v3:sujetEvenement>Sujet50</v3:sujetEvenement>\r\n         <!--Optional:-->\r\n         <v3:descriptionEvenement>Description</v3:descriptionEvenement>\r\n         <v3:initiateurEvenement>Initiateur</v3:initiateurEvenement>\r\n         <!--Optional:-->\r\n         <v3:lieuEvenement>Lieu</v3:lieuEvenement>\r\n      </v3:modifierRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{PAAS_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "NotifierConseiller",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"var stripNS = require('xml2js').processors.stripPrefix;\r",
+									"var parseString = require('xml2js').parseString;\r",
+									"let jsResponse;\r",
+									"\r",
+									"parseString(responseBody, {\r",
+									"    tagNameProcessors: [stripNS]\r",
+									"}, function (err, result) {\r",
+									"    jsResponse = result\r",
+									"});\r",
+									"\r",
+									"errorMessage = jsResponse['Envelope']['Body'][0]['notifierConseillerResponse'][0]['status']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "abdd8929-6b43-4269-ba56-77b9b111307a"
+							}
+						}
+					],
+					"_postman_id": "8d45bb36-9f83-445d-84da-9d4bb382ce02",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "notifierConseiller",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n</soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:notifierConseillerRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>systeme</v3:systemeMessagerie>\r\n         <v3:idRessource>Mathieu.gauthier.mgauthier.uni@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:sujetMemo>GrosSujet</v3:sujetMemo>\r\n         <v3:descriptionMemo>GrosseDescription</v3:descriptionMemo>\r\n         <v3:initiateurMemo>andrea.ocean.aocean.uni@mvtdevdesjardins.com</v3:initiateurMemo>\r\n         <v3:modele>modele</v3:modele>\r\n         <v3:priorite>High</v3:priorite>\r\n      </v3:notifierConseillerRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{PAAS_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenirSommaireRendezVous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"var stripNS = require('xml2js').processors.stripPrefix;\r",
+									"var parseString = require('xml2js').parseString;\r",
+									"let jsResponse;\r",
+									"\r",
+									"parseString(responseBody, {\r",
+									"    tagNameProcessors: [stripNS]\r",
+									"}, function (err, result) {\r",
+									"    jsResponse = result\r",
+									"});\r",
+									"\r",
+									"errorMessage = jsResponse['Envelope']['Body'][0]['obtenirSommaireRendezVousResponse'][0]['RendezVousListe']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "eaa99324-f127-4bc9-89f6-4378fb24a9cf"
+							}
+						}
+					],
+					"_postman_id": "cd9ef4f1-e161-4387-a4d1-d8276ba9161d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "obtenirSommaireRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n\r\n<Address>applicationsetservices:ADP</Address>\r\n\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n\r\n<psd:EnvSOA/>\r\n\r\n</ReferenceParameters>\r\n\r\n</From>\r\n\r\n</soapenv:Header>\r\n\r\n   <soapenv:Body>\r\n\r\n      <v3:obtenirSommaireRendezVousRequest>\r\n\r\n         <v3:Periode>\r\n\r\n            <v3:dateDebut>2022-07-18</v3:dateDebut>\r\n\r\n            <v3:dateFin>2022-07-20</v3:dateFin>\r\n\r\n         </v3:Periode>\r\n\r\n      </v3:obtenirSommaireRendezVousRequest>\r\n\r\n   </soapenv:Body>\r\n\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{PAAS_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "SupprimerRendezVous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"Status\"', function() {\r",
+									"    var stripNS = require('xml2js').processors.stripPrefix;\r",
+									"var parseString = require('xml2js').parseString;\r",
+									"let jsResponse;\r",
+									"\r",
+									"parseString(responseBody, {\r",
+									"    tagNameProcessors: [stripNS]\r",
+									"}, function (err, result) {\r",
+									"    jsResponse = result\r",
+									"});\r",
+									"\r",
+									"errorMessage = jsResponse['Envelope']['Body'][0]['supprimerRendezVousResponse'][0]['statut']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "5f9e4ba7-8612-4ba4-bff3-c85de73d64cc"
+							}
+						}
+					],
+					"_postman_id": "8f3d5fea-6ed4-40e2-8e28-39e05baee891",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "supprimerRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n</soapenv:Header>\r\n\r\n   <soapenv:Body>\r\n      <v3:supprimerRendezVousRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <v3:idEvenement>{{idRendezVous}}</v3:idEvenement>\r\n         <v3:idRessource>Mathieu.gauthier.mgauthier.uni@mvtdevdesjardins.com,andrea.ocean.aocean.uni@mvtdevdesjardins.com</v3:idRessource>\r\n      </v3:supprimerRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{PAAS_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "VerifierDisponibiliteRessourceList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"DISPONIBILITÉ\"', function() {\r",
+									"var stripNS = require('xml2js').processors.stripPrefix;\r",
+									"var parseString = require('xml2js').parseString;\r",
+									"let jsResponse;\r",
+									"\r",
+									"parseString(responseBody, {\r",
+									"    tagNameProcessors: [stripNS]\r",
+									"}, function (err, result) {\r",
+									"    jsResponse = result\r",
+									"});\r",
+									"\r",
+									"errorMessage = jsResponse['Envelope']['Body'][0]['verifierDisponibiliteRessourceListResponse'][0]['disponibiliteRessourceList']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "e9dec48d-2b66-4d66-9c2d-0f247a848fef"
+							}
+						}
+					],
+					"_postman_id": "f596c1c8-f83a-4b96-b327-5b18f8f82abb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "verifierDisponibiliteRessourceList",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n</soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:verifierDisponibiliteRessourceListRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <!--1 or more repetitions:-->\r\n         <v3:idRessource>sylvain.lambert@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:idRessource>gabriel.a.roy@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2022-04-17T19:00:00.000</v3:dateDebut>\r\n            <v3:dateFin>2022-04-19T19:30:00.000</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <v3:duree>15</v3:duree>\r\n      </v3:verifierDisponibiliteRessourceListRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{PAAS_endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "18d70b5c-8d35-4db6-bac8-2d072c1fa728"
+		},
+		{
+			"name": "GRID",
+			"item": [
+				{
+					"name": "AjouterRendezVous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"    var xmlTree = xml2Json(responseBody);\r",
+									"    var errorMessage = xmlTree['Envelope']['Body']['ajouterRendezVousResponse']['idEvenement']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "695881d1-e108-4cf8-9751-b1bb19e2fc0e"
+							}
+						}
+					],
+					"_postman_id": "66a63829-3b1d-4269-a7cb-3ee3cd8f3048",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "ajouterRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>ApplicationPCAIS_ClRelaPriseRendezVous</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">Passw0rd</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n\r\n<wsa:Action>ajouterRendezVous</wsa:Action></soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:ajouterRendezVousRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <!--<v3:idRessource>EXC1111@mvtdevdesjardins.com</v3:idRessource>-->\r\n         <v3:idRessource>SGestionAgendaMr@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2018-09-01T17:00:00.000-04:00</v3:dateDebut>\r\n            <v3:dateFin>2018-09-01T18:30:00.000-04:00</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <!--Optional:-->\r\n         <v3:sujetEvenement>Test GestionAgenda</v3:sujetEvenement>\r\n         <!--Optional:-->\r\n         <v3:descriptionEvenement>Description</v3:descriptionEvenement>\r\n         <v3:initiateurEvenement>Initiateur</v3:initiateurEvenement>\r\n         <!--Optional:-->\r\n         <v3:lieuEvenement>Lieu</v3:lieuEvenement>\r\n      </v3:ajouterRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{GRID_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "ModifierRendezVous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"    var xmlTree = xml2Json(responseBody);\r",
+									"    var errorMessage = xmlTree['Envelope']['Body']['modifierRendezVousResponse']['idEvenement']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "4df4672f-6275-46dd-9091-e0f01bfb2454"
+							}
+						}
+					],
+					"_postman_id": "4e33042d-95fc-49a3-ba6e-0a67324b0b66",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "modifierRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>ApplicationPCAIS_ClRelaPriseRendezVous</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">Passw0rd</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n   <wsa:Action>modifierRendezVous</wsa:Action></soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:modifierRendezVousRequest>\r\n         <!--Optional:-->\r\n         \r\n         <v3:idEvenement>dsdsa</v3:idEvenement>\r\n         <v3:idRessource>Mathieu.gauthier.mgauthier.uni@mvtdevdesjardins.com,andrea.ocean.aocean.uni@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2018-09-01T19:00:00.000-04:00</v3:dateDebut>\r\n            <v3:dateFin>2018-09-01T19:30:00.000-04:00</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <!--Optional:-->\r\n         <v3:sujetEvenement>Sujet50</v3:sujetEvenement>\r\n         <!--Optional:-->\r\n         <v3:descriptionEvenement>Description</v3:descriptionEvenement>\r\n         <v3:initiateurEvenement>Initiateur</v3:initiateurEvenement>\r\n         <!--Optional:-->\r\n         <v3:lieuEvenement>Lieu</v3:lieuEvenement>\r\n      </v3:modifierRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{GRID_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "NotifierConseiller",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"    var xmlTree = xml2Json(responseBody);\r",
+									"    var errorMessage = xmlTree['Envelope']['Body']['notifierConseillerResponse']['status']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "b2b34571-70c3-493b-9ecb-ad6e1696f603"
+							}
+						}
+					],
+					"_postman_id": "dd72b43a-384a-4e3d-95ca-8b4f913e0dde",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "notifierConseiller",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>ApplicationPCAIS_ClRelaPriseRendezVous</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">Passw0rd</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n</soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:notifierConseillerRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>systeme</v3:systemeMessagerie>\r\n         <v3:idRessource>Mathieu.gauthier.mgauthier.uni@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:sujetMemo>GrosSujet</v3:sujetMemo>\r\n         <v3:descriptionMemo>GrosseDescription</v3:descriptionMemo>\r\n         <v3:initiateurMemo>andrea.ocean.aocean.uni@mvtdevdesjardins.com</v3:initiateurMemo>\r\n         <v3:modele>modele</v3:modele>\r\n         <v3:priorite>High</v3:priorite>\r\n      </v3:notifierConseillerRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{GRID_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenirSommaireRendezVous",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"ID_EVENEMENT\"', function() {\r",
+									"    var xmlTree = xml2Json(responseBody);\r",
+									"    var errorMessage = xmlTree['Envelope']['Body']['obtenirSommaireRendezVousResponse']['RendezVousListe']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "a7265ffb-ec70-4f55-863e-f1a87057a5ec"
+							}
+						}
+					],
+					"_postman_id": "a7e03560-5aaf-434a-8bce-d514e418e1ca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "obtenirSommaireRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>ApplicationPCAIS_ClRelaPriseRendezVous</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">Passw0rd</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n</soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:obtenirSommaireRendezVousRequest>\r\n         <v3:Periode>\r\n            <v3:dateDebut>20120-09-01</v3:dateDebut>\r\n            <v3:dateFin>2018-10-15</v3:dateFin>\r\n         </v3:Periode>\r\n      </v3:obtenirSommaireRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{GRID_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "SupprimerRendezVous",
+					"_postman_id": "abe81aed-3052-4e4c-840f-0bf633097d3c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "supprimerRendezVous",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>ApplicationPCAIS_ClRelaPriseRendezVous</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">Passw0rd</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n</soapenv:Header>\r\n\r\n   <soapenv:Body>\r\n      <v3:supprimerRendezVousRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <v3:idEvenement>Id=AAApAFNQcmlzZURlUmVuZGV6Vm91c01yQG12dGRldmRlc2phcmRpbnMuY29tAEYAAAAAAN7oOqyt5tVPuDIzpr3wnTMHALWftjFkJNpEsv98ypqvmVUAAAAi47gAAE3LVUEtTe5BhRjy1qttCvAAAiuLCoQAAA== ChangeKey=DwAAABYAAABNy1VBLU3uQYUY8tarbQrwAAIrxuJn</v3:idEvenement>\r\n         <v3:idRessource>Mathieu.gauthier.mgauthier.uni@mvtdevdesjardins.com,andrea.ocean.aocean.uni@mvtdevdesjardins.com</v3:idRessource>\r\n      </v3:supprimerRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{GRID_endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "VerifierDisponibiliteRessourceList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verified that message contains a tag called \"DISPONIBILITÉ\"', function() {\r",
+									"    var xmlTree = xml2Json(responseBody);\r",
+									"    var errorMessage = xmlTree['Envelope']['Body']['verifierDisponibiliteRessourceListResponse']['disponibiliteRessourceList']\r",
+									"    pm.expect(errorMessage).is.not.null\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"id": "3bee27f8-1c52-4ab2-aa72-2770268f45b5"
+							}
+						}
+					],
+					"_postman_id": "bb298116-c23a-436c-99fc-375e85bfe6f3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-desj-messageid",
+								"value": "test",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "verifierDisponibiliteRessourceList",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>ApplicationPCAIS_ClRelaPriseRendezVous</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">Passw0rd</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n</soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:verifierDisponibiliteRessourceListRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <!--1 or more repetitions:-->\r\n         <v3:idRessource>sylvain.lambert@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:idRessource>gabriel.a.roy@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2022-04-17T19:00:00.000</v3:dateDebut>\r\n            <v3:dateFin>2022-04-19T19:30:00.000</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <v3:duree>15</v3:duree>\r\n      </v3:verifierDisponibiliteRessourceListRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": "https://{{host}}:{{port}}{{GRID_endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "40bbefac-dd2f-4d60-b3bc-9ea2a1928543"
+		}
+	]
+}
