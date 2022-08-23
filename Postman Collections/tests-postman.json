@@ -41,7 +41,7 @@
 							}
 						}
 					],
-					"_postman_id": "31e1a535-14ae-409d-af59-6639c9c6705f",
+					"id": "31e1a535-14ae-409d-af59-6639c9c6705f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -72,7 +72,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0R2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n\r\n<wsa:Action>ajouterRendezVous</wsa:Action></soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:ajouterRendezVousRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <!--<v3:idRessource>EXC1111@mvtdevdesjardins.com</v3:idRessource>-->\r\n         <v3:idRessource>SGestionAgendaMr@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2019-09-01T17:00:00.000-04:00</v3:dateDebut>\r\n            <v3:dateFin>2019-09-01T18:30:00.000-04:00</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <!--Optional:-->\r\n         <v3:sujetEvenement>Test GestionAgenda</v3:sujetEvenement>\r\n         <!--Optional:-->\r\n         <v3:descriptionEvenement>Description</v3:descriptionEvenement>\r\n         <v3:initiateurEvenement>Initiateur</v3:initiateurEvenement>\r\n         <!--Optional:-->\r\n         <v3:lieuEvenement>Lieu</v3:lieuEvenement>\r\n      </v3:ajouterRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+							"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v3=\"http://desjardins.com/GestAff/SoutSrvCtl/schemas/GestionAgenda/v3\">\r\n<soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\"><wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\"><wsse:UsernameToken wsu:Id=\"UsernameToken-A97554C3CC7882348A16515212155606\"><wsse:Username>{{username}}</wsse:Username><wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\">{{password}}</wsse:Password><wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">DfsDm2kGfEy0SALUTR2u/Ejq7oQ==</wsse:Nonce><wsu:Created>2022-05-02T19:53:35.560Z</wsu:Created></wsse:UsernameToken></wsse:Security>\r\n<From xmlns=\"http://www.w3.org/2005/08/addressing\">\r\n<Address>applicationsetservices:ADP</Address>\r\n<ReferenceParameters xmlns:psd=\"http://desjardins.com/GestOrg/GestionTI/PSD/UserManagement/Routing\">\r\n<psd:EnvSOA/>\r\n</ReferenceParameters>\r\n</From>\r\n\r\n<wsa:Action>ajouterRendezVous</wsa:Action></soapenv:Header>\r\n   <soapenv:Body>\r\n      <v3:ajouterRendezVousRequest>\r\n         <!--Optional:-->\r\n         <v3:systemeMessagerie>Exchange</v3:systemeMessagerie>\r\n         <!--<v3:idRessource>EXC1111@mvtdevdesjardins.com</v3:idRessource>-->\r\n         <v3:idRessource>SGestionAgendaMr@mvtdevdesjardins.com</v3:idRessource>\r\n         <v3:temporelEvenement>\r\n            <v3:dateDebut>2019-09-01T17:00:00.000-04:00</v3:dateDebut>\r\n            <v3:dateFin>2019-09-01T18:30:00.000-04:00</v3:dateFin>\r\n         </v3:temporelEvenement>\r\n         <!--Optional:-->\r\n         <v3:sujetEvenement>Test GestionAgenda</v3:sujetEvenement>\r\n         <!--Optional:-->\r\n         <v3:descriptionEvenement>Description</v3:descriptionEvenement>\r\n         <v3:initiateurEvenement>Initiateur</v3:initiateurEvenement>\r\n         <!--Optional:-->\r\n         <v3:lieuEvenement>Lieu</v3:lieuEvenement>\r\n      </v3:ajouterRendezVousRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -115,7 +115,7 @@
 							}
 						}
 					],
-					"_postman_id": "a5475a5b-460c-4c43-88c8-eeb7d0c1ef96",
+					"id": "a5475a5b-460c-4c43-88c8-eeb7d0c1ef96",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -183,7 +183,7 @@
 							}
 						}
 					],
-					"_postman_id": "8d45bb36-9f83-445d-84da-9d4bb382ce02",
+					"id": "8d45bb36-9f83-445d-84da-9d4bb382ce02",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -251,7 +251,7 @@
 							}
 						}
 					],
-					"_postman_id": "cd9ef4f1-e161-4387-a4d1-d8276ba9161d",
+					"id": "cd9ef4f1-e161-4387-a4d1-d8276ba9161d",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -319,7 +319,7 @@
 							}
 						}
 					],
-					"_postman_id": "8f3d5fea-6ed4-40e2-8e28-39e05baee891",
+					"id": "8f3d5fea-6ed4-40e2-8e28-39e05baee891",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -387,7 +387,7 @@
 							}
 						}
 					],
-					"_postman_id": "f596c1c8-f83a-4b96-b327-5b18f8f82abb",
+					"id": "f596c1c8-f83a-4b96-b327-5b18f8f82abb",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -424,7 +424,7 @@
 					"response": []
 				}
 			],
-			"_postman_id": "18d70b5c-8d35-4db6-bac8-2d072c1fa728"
+			"id": "18d70b5c-8d35-4db6-bac8-2d072c1fa728"
 		},
 		{
 			"name": "GRID",
@@ -452,7 +452,7 @@
 							}
 						}
 					],
-					"_postman_id": "66a63829-3b1d-4269-a7cb-3ee3cd8f3048",
+					"id": "66a63829-3b1d-4269-a7cb-3ee3cd8f3048",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -517,7 +517,7 @@
 							}
 						}
 					],
-					"_postman_id": "4e33042d-95fc-49a3-ba6e-0a67324b0b66",
+					"id": "4e33042d-95fc-49a3-ba6e-0a67324b0b66",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -576,7 +576,7 @@
 							}
 						}
 					],
-					"_postman_id": "dd72b43a-384a-4e3d-95ca-8b4f913e0dde",
+					"id": "dd72b43a-384a-4e3d-95ca-8b4f913e0dde",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -635,7 +635,7 @@
 							}
 						}
 					],
-					"_postman_id": "a7e03560-5aaf-434a-8bce-d514e418e1ca",
+					"id": "a7e03560-5aaf-434a-8bce-d514e418e1ca",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -673,7 +673,7 @@
 				},
 				{
 					"name": "SupprimerRendezVous",
-					"_postman_id": "abe81aed-3052-4e4c-840f-0bf633097d3c",
+					"id": "abe81aed-3052-4e4c-840f-0bf633097d3c",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -732,7 +732,7 @@
 							}
 						}
 					],
-					"_postman_id": "bb298116-c23a-436c-99fc-375e85bfe6f3",
+					"id": "bb298116-c23a-436c-99fc-375e85bfe6f3",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -769,7 +769,7 @@
 					"response": []
 				}
 			],
-			"_postman_id": "40bbefac-dd2f-4d60-b3bc-9ea2a1928543"
+			"id": "40bbefac-dd2f-4d60-b3bc-9ea2a1928543"
 		}
 	]
 }
